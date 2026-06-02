@@ -1,0 +1,23 @@
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+python-dotenv==1.0.1
+httpx==0.27.2
+pydantic==2.9.2
+
+# LangChain core
+langchain==0.3.7
+langchain-pinecone==0.2.0
+langchain-groq==0.2.1
+langchain-huggingface==0.1.2
+
+# Vector DB
+pinecone==5.3.1
+
+# HuggingFace embeddings (runs locally)
+sentence-transformers==3.3.1
+torch==2.5.1
+transformers==4.46.3
+
+# Transcript / media
+youtube-transcript-api==0.6.3
+yt-dlp==2025.1.15

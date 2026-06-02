@@ -1,0 +1,22 @@
+"backend/.env" 
+# Secrets
+backend/.env
+backend/instagram_cookies.txt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node
+frontend/node_modules/
+frontend/build/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
