@@ -16,6 +16,7 @@ from models import VideoMetadata, ChatMessage, AnalyzeRequest, ChatRequest
 
 app = FastAPI(title="RAG Video Chatbot", version="1.0.0")
 
+# Allow all origins in production — restrict to your Vercel URL after deploy
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -62,7 +63,6 @@ async def analyze_videos(request: AnalyzeRequest):
         if v.get("status") == "success"
     }
 
-    # Succeed if at least one video processed
     if len(videos) == 0:
         raise HTTPException(
             status_code=422,
