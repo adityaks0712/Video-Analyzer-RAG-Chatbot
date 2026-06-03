@@ -4,42 +4,6 @@ A full-stack RAG chatbot that lets creators compare two social videos (YouTube +
 
 ---
 
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  React Frontend (port 3000)                                  │
-│  ┌────────────────────┐  ┌──────────────────────────────┐   │
-│  │  Video Cards (A/B) │  │  Chat Panel (streaming SSE)  │   │
-│  │  Stats + ER bar    │  │  Quick prompts + citations   │   │
-│  └────────────────────┘  └──────────────────────────────┘   │
-└──────────────────────────────┬──────────────────────────────┘
-                               │ REST + SSE
-┌──────────────────────────────▼──────────────────────────────┐
-│  FastAPI Backend (port 8000)                                 │
-│                                                              │
-│  VideoProcessor                   RAGEngine                  │
-│  ├─ detect_platform()             ├─ index_video()           │
-│  ├─ YouTube: yt-dlp + YT-API      ├─ chat_stream() → SSE     │
-│  └─ Instagram: yt-dlp             ├─ LangChain memory        │
-│                                   └─ Citation extraction     │
-└──────────────────────────────┬──────────────────────────────┘
-                               │
-        ┌──────────────────────┴────────────────────┐
-        │                                           │
-┌───────▼───────┐                         ┌────────▼────────┐
-│   Pinecone    │                         │ Claude / OpenAI │
-│  Vector DB    │                         │   LLM (chat)    │
-│  (embeddings) │                         └─────────────────┘
-└───────────────┘
-        │
-┌───────▼───────┐
-│ OpenAI        │
-│ text-embed-   │
-│ 3-small       │
-└───────────────┘
-```
-
 ---
 
 ## Tech Stack
@@ -48,8 +12,8 @@ A full-stack RAG chatbot that lets creators compare two social videos (YouTube +
 |-------------|---------------------------------------|
 | Frontend    | React 18, CSS (no UI library)         |
 | Backend     | FastAPI + Uvicorn                     |
-| LLM         | Claude (Anthropic) via LangChain      |
-| Embeddings  | OpenAI `text-embedding-3-small`       |
+| LLM         | Grok     |
+| Embeddings  | HuggingFace `text-embedding-3-small`       |
 | Vector DB   | Pinecone (Serverless)                 |
 | RAG         | LangChain                             |
 | Transcripts | youtube-transcript-api + yt-dlp       |
